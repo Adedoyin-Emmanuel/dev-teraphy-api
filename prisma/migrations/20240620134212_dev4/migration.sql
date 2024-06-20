@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "googleId" DROP NOT NULL,
+ALTER COLUMN "googleId" SET DEFAULT '';

@@ -65,7 +65,17 @@ class AuthController {
 
     const { email, name, password } = value;
 
+    const existingTeraphist = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (existingTeraphist)
+      return response(res, 400, "Teraphist with this email already exists");
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const teraphist = await prisma.user.create({
       // @ts-ignore
       data: {
@@ -141,7 +151,10 @@ class AuthController {
       return response(res, 400, "Invalid credentials");
     }
 
-    const isPasswordValid = await bcrypt.compare(password, teraphist.password as string);
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      teraphist.password as string
+    );
 
     if (!isPasswordValid) {
       return response(res, 400, "Invalid credentials");
