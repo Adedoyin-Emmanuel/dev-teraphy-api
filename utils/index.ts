@@ -8,6 +8,7 @@ import logger from "./logger";
 import supabase from "./supabase";
 import eventEmitter from "./eventEmitter";
 import generateOTP from "./generateOtp";
+import generateAccessToken from "./generateAccessToken";
 
 export {
   connectToDb,
@@ -19,5 +20,6 @@ export {
   logger,
   supabase,
   eventEmitter,
-  generateOTP
+  generateOTP,
+  generateAccessToken
 };

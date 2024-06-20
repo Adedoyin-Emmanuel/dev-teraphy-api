@@ -17,3 +17,9 @@ export const updateLoginSchema = Joi.object({
   role: Joi.string().default("user"),
   googleId: Joi.string().required(),
 });
+
+
+export const verifyOtpSchema = Joi.object({
+    terahpistId: Joi.string().required(),
+    otp: Joi.string().required(),
+})
