@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   postgres:
-    image: bitnami/postgres:latest
-    container_name: postgres
+    image: bitnami/postgresql:latest
+    container_name: dev-teraphy
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin123
