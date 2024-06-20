@@ -50,7 +50,6 @@
     "node": "18.18.0"
   },
   "dependencies": {
-    "@getbrevo/brevo": "^2.2.0",
     "@prisma/client": "latest",
     "@supabase/supabase-js": "^2.43.5",
     "bcryptjs": "^2.4.3",

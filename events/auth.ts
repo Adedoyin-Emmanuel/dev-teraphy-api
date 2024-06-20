@@ -22,5 +22,5 @@ eventEmitter.on(TERAPHIST_CREATED, async (data) => {
     <h1>${OTP}</h1>
     `;
 
-  await sendEmail("Verify account", message, email);
+  sendEmail("Verify account", message, email);
 });
