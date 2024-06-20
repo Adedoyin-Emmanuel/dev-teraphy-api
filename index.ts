@@ -11,6 +11,7 @@ import { accessLogStream, logger } from "./utils";
 import { PORT, IS_PRODUCTION, MORGAN_CONFIG } from "./constants/app";
 import helmet from "helmet";
 
+import "./events";
 
 import baseRouter from "./features/base/route";
 import swaggerRouter from "./swagger";

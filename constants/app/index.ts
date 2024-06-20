@@ -8,3 +8,6 @@ export const MORGAN_CONFIG = IS_PRODUCTION
   : "dev";
 
 export const PORT = process.env.PORT || 2800;
+
+
+export const TERAPHIST_CREATED = "Terahist created";

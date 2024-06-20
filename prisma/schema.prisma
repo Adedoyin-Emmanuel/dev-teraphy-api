@@ -16,10 +16,13 @@ model User {
   name  String?
 
   role      UserRole @default(user)
+  googleId String @unique 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  password String?
+  verified Boolean @default(false)
   Appointment Appointment[]
+  Token Token[]
 }
 
 model Appointment {
@@ -33,8 +36,26 @@ model Appointment {
 }
 
 
+model Token {
+  id String @id @default(uuid())
+
+  token String
+  type TokenType
+  expiresBy DateTime 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
 
 enum UserRole {
   user
   teraphist
+}
+
+enum TokenType{
+  verify
+  refresh
+  access
 }
