@@ -28,13 +28,23 @@ class AuthController {
       return response(res, 500, authResponse.error.message);
     }
 
-    return response(res, 200, authResponse.data.url);
+    return response(res, 200, "Login successful", authResponse.data.url);
   }
 
   static async updateUserLoginData(req: Request, res: Response) {
     const value = await updateLoginSchema.validateAsync(req.body);
 
     const { email, name, role, googleId } = value;
+
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        googleId,
+      },
+    });
+
+    if (existingUser) {
+      return response(res, 200, "User updated successfully");
+    }
 
     const user = await prisma.user.create({
       // @ts-ignore
@@ -131,7 +141,7 @@ class AuthController {
       return response(res, 400, "Invalid credentials");
     }
 
-    const isPasswordValid = await bcrypt.compare(password, teraphist.password);
+    const isPasswordValid = await bcrypt.compare(password, teraphist.password as string);
 
     if (!isPasswordValid) {
       return response(res, 400, "Invalid credentials");
@@ -148,6 +158,5 @@ class AuthController {
     return response(res, 200, "Login successful", tokens);
   }
 }
-
 
 export default AuthController;

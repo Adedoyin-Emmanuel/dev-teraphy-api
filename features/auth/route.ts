@@ -5,6 +5,8 @@ const authRouter = express.Router();
 
 authRouter.post("/login/google", AuthController.login);
 
+authRouter.put("/user", AuthController.updateUserLoginData)
+
 authRouter.post("/signup/teraphist", AuthController.teraphistSignup);
 authRouter.post("/login/teraphist", AuthController.terahpistLogin);
 

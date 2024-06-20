@@ -19,7 +19,7 @@ model User {
   googleId String @unique 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  password String?
+  password String? @default("")
   verified Boolean @default(false)
   Appointment Appointment[]
   Token Token[]
