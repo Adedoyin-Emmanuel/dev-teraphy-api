@@ -19,6 +19,5 @@ export const updateLoginSchema = Joi.object({
 });
 
 export const verifyOtpSchema = Joi.object({
-  terahpistId: Joi.string().required(),
   otp: Joi.string().required(),
 });

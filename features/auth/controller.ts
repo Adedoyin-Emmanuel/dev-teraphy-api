@@ -100,16 +100,12 @@ class AuthController {
   static async verifyOtp(req: Request, res: Response) {
     const value = await verifyOtpSchema.validateAsync(req.body);
 
-    const { terahpistId, otp } = value;
+    const { otp } = value;
 
     const token = await prisma.token.findFirst({
       where: {
-        userId: terahpistId,
         token: otp,
         type: "verify",
-        expiresBy: {
-          gte: new Date().toISOString(),
-        },
       },
     });
 
@@ -117,9 +113,15 @@ class AuthController {
       return response(res, 400, "Invalid or expired OTP");
     }
 
+    const teraphist = await prisma.user.findFirst({
+      where: {
+        id: token.userId,
+      },
+    });
+
     await prisma.user.update({
       where: {
-        id: terahpistId,
+        id: teraphist?.id,
       },
       data: {
         verified: true,
@@ -128,7 +130,7 @@ class AuthController {
 
     await prisma.token.deleteMany({
       where: {
-        userId: terahpistId,
+        userId: teraphist?.id,
         type: "verify",
       },
     });
