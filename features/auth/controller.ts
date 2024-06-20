@@ -148,3 +148,6 @@ class AuthController {
     return response(res, 200, "Login successful", tokens);
   }
 }
+
+
+export default AuthController;

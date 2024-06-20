@@ -15,6 +15,7 @@ import "./events";
 
 import baseRouter from "./features/base/route";
 import swaggerRouter from "./swagger";
+import authRouter from "./features/auth/route";
 dotenv.config();
 
 const app = express();
@@ -33,6 +34,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/", baseRouter);
 app.use("/api-docs", swaggerRouter);
+
+
+app.use("/api/auth", authRouter);
 
 app.use(useNotFound);
 app.use(useErrorHandler);
